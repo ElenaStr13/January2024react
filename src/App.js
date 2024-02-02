@@ -1,10 +1,13 @@
 import './App.css';
+import {Simpsons} from "./components/Simpsons/Simpsons";
+import {Characters} from "./components/RickAndMorty/Characters";
 
 function App() {
   return (
-    <div className="App">
-      Hello world world
-    </div>
+      <div>
+          {/*<Simpsons/>*/}
+          <Characters/>
+      </div>
   );
 }
 
