@@ -1,0 +1,8 @@
+.Launch {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border: 1px solid black;
+    width: 30%;
+    margin-bottom: 20px;
+}
