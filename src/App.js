@@ -1,11 +1,11 @@
 import './App.css';
 import {Posts} from "./components/Posts/Posts.js";
-import {Launches} from "./components/Launches/launches";
+import {Launches} from "./components/Launches/Launches";
 
 function App() {
   return (
-    <Posts/>
-    //   <Launches/>
+    // <Posts/>
+      <Launches/>
   );
 }
 export default App;
