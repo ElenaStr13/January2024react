@@ -15,7 +15,7 @@ const Car = ({car, setCarForUpdate, setTrigger}) => {
             <div>price: {price}</div>
             <div>year: {year}</div>
             <button onClick={() => setCarForUpdate(car)}>update</button>
-            <button onClick={() => end}>delete</button>
+            <button onClick={() => end()}>delete</button>
         </div>
     );
 };
