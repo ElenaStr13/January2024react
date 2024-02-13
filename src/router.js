@@ -4,6 +4,7 @@ import {TodosPage} from "./pages/TodosPage";
 import {AlbumsPage} from "./pages/AlbumsPage";
 import {ErrorPage} from "./pages/ErrorPage";
 import {CommentsPage} from "./pages/CommentsPage";
+import PostsPage from "./pages/PostsPage";
 
 
 
@@ -21,6 +22,9 @@ const router = createBrowserRouter([
             },
             {
                 path: 'comments', element: <CommentsPage/>
+            },
+            {
+                path: 'posts/:id', element: <PostsPage/>
             }
         ]
     }
