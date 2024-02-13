@@ -7,19 +7,9 @@ const comments = '/comments';
 const posts = 'posts';
 
 const urls = {
-    todos: {
-        base: todos,
-        byId: (id) => `${todos}/${id}`
-    },
-    albums: {
-        base: albums,
-        byId: (id) => `${albums}/${id}`
-    },
-    comments: {
-        base: comments,
-        byId: (postId) => `${comments}/${postId}`,
-        getPostsByCommentId: (postId) => `${comments}/${postId}`
-    },
+    todos,
+    albums,
+    comments,
     posts: {
         byId: (id) => `${posts}/${id}`
     }

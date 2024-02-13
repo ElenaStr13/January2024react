@@ -21,11 +21,13 @@ const router = createBrowserRouter([
                 path: 'albums', element: <AlbumsPage/>
             },
             {
-                path: 'comments', element: <CommentsPage/>
-            },
-            {
-                path: 'comments/posts/:id', element: <PostsPage/>
+                path: 'comments', element: <CommentsPage/>, children: [
+                    {
+                        path: 'post', element: <PostsPage/>
+                    }
+                ]
             }
+
         ]
     }
 ]);
