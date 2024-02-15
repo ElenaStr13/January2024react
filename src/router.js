@@ -7,6 +7,7 @@ import {UserDetailsPage} from "./pages/UserDetailsPage";
 import {PostsPage} from "./pages/PostsPage";
 import {PostDetails} from "./components/PostContainer/PostDetails";
 import {postService} from "./service/postService";
+import {PostDetailsPage} from "./pages/PostDetailsPage";
 
 
 
@@ -24,7 +25,7 @@ const router = createBrowserRouter([
             },
             {
                 //id instead postId not working
-                path: 'posts/:postId', element: <PostDetails/>,
+                path: 'posts/:postId', element: <PostDetailsPage/>,
                 loader: ({params: {postId}}) => postService.getById(postId),
             }
             ]
