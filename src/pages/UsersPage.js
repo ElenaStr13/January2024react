@@ -1,15 +1,10 @@
-import {Users} from "../components/UsersContainer/Users";
-import {Outlet, useLoaderData} from "react-router-dom";
+import {Users} from "../components";
+
 
 const UsersPage = () => {
-    const {data} = useLoaderData();
-
     return (
         <div>
-           <h2>Users</h2>
-            <Outlet/>
-            <hr/>
-            <Users users={data}/>
+            <Users/>
         </div>
     );
 };

@@ -1,4 +1,3 @@
-import React from 'react';
 import {useNavigate} from "react-router-dom";
 
 const UserDetails = ({userDetails}) => {
@@ -14,7 +13,7 @@ const UserDetails = ({userDetails}) => {
             <div>street: {str}</div>
             <div>phone: {phone}</div>
             <div>website: {website}</div>
-            <button onClick={() => navigate('posts')}>post of current user</button>
+            <button onClick={() => navigate('posts')}>posts of user</button>
         </div>
     );
 };

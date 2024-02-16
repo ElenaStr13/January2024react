@@ -1,19 +1,25 @@
-import {Outlet, useLoaderData, useLocation, useParams} from "react-router-dom";
-import {useState} from "react";
+import {Outlet, useParams} from "react-router-dom";
+import {useEffect, useState} from "react";
 
-import {UserDetails} from "../components/UsersContainer/UserDetails";
+import {userService} from "../service";
+import {UserDetails} from "../components";
+
+
 
 const UserDetailsPage = () => {
     const [userDetails, setUserDetails] = useState(null)
     const {id} = useParams();
-    const {state} = useLocation();
-    const {data} = useLoaderData();
+
+
+    useEffect(() => {
+        userService.byId(id).then(({data}) => setUserDetails(data))
+    }, [id]);
 
     return (
         <div>
-            <Outlet/>
+            {userDetails && <UserDetails userDetails={userDetails}/>}
             <hr/>
-            <UserDetails userDetails={data}/>
+            <Outlet/>
         </div>
     );
 };

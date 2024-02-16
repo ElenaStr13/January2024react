@@ -1,7 +1,7 @@
-const baseURL = 'https://jsonplaceholder.typicode.com';
+const baseURL = 'https://jsonplaceholder.typicode.com'
 
-const users = '/users';
-const posts = '/posts';
+const users = '/users'
+const posts = '/posts'
 const comments = '/comments'
 
 const urls = {
@@ -9,11 +9,13 @@ const urls = {
         base: users,
         byId: (id) => `${users}/${id}`
     },
-    posts:{
+    posts: {
         base: posts,
         byId: (id) => `${posts}/${id}`
-  },
-    comments
+    },
+    comments: {
+        base: comments
+    }
 }
 
 export {

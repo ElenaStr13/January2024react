@@ -1,4 +1,3 @@
-import React from 'react';
 import {useNavigate} from "react-router-dom";
 
 const User = ({user}) => {
@@ -9,7 +8,7 @@ const User = ({user}) => {
         <div>
             <div>id: {id}</div>
             <div>name: {name}</div>
-            <button onClick={() => navigate(id.toString(), {state: {user}})}>getDetails</button>
+            <button onClick={() => navigate(`/users/${id}`)}>getDetails</button>
         </div>
     );
 };

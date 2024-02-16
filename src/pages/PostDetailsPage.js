@@ -1,27 +1,21 @@
-import {useLoaderData, useLocation, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 
-import {postService} from "../service/postService";
-import {PostDetails} from "../components/PostContainer/PostDetails";
+import {postService} from "../service";
+import {PostDetails} from "../components";
 
 const PostDetailsPage = () => {
-    // const [postDetails, setPostDetails] = useState(null)
-    // const {id} = useParams();
-    // const {state} = useLocation();
-    const {data} = useLoaderData();
+    const [postDetails, setPostDetails] = useState(null)
+    const {id} = useParams();
 
-    // useEffect(() => {
-    //     if (state?.post) {
-    //         setPostDetails(state.post)
-    //     } else {
-    //         postService.getById(id).then(({data}) => setPostDetails(data))
-    //     }
-    // }, [id, state]);
+
+    useEffect(() => {
+        postService.byId(id).then(({data}) => setPostDetails(data))
+    }, [id])
 
     return (
         <div>
-            {/*{postDetails && <PostDetails postDetails={postDetails}/>}*/}
-            <PostDetails post={data}/>
+            {postDetails && <PostDetails postDetails={postDetails}/>}
         </div>
     );
 };

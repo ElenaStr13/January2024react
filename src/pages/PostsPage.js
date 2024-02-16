@@ -1,10 +1,13 @@
-import React from 'react';
-import {Posts} from "../components/PostContainer/Posts";
+import {useParams} from "react-router-dom";
+
+import {Posts} from "../components";
 
 const PostsPage = () => {
+    const {id} = useParams();
+
     return (
         <div>
-            <Posts/>
+            <Posts userId={id}/>
         </div>
     );
 };
