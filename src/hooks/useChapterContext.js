@@ -1,14 +1,16 @@
-import {useContext} from "react";
+import {useContext, useState} from "react";
 
 import {Context} from "../hoc";
 
 const useChapterContext = () => {
-
-    const [chapter, setChapter] = useContext(Context);
+    useContext(Context)
+     //const [chapter, setChapter] = useContext(Context);
+    //const [chapter, setChapter] = useState([])
 
     return {
-        chapter,
-        setChapter
+        // chapter,
+        // setChapter
+
     }
 }
 

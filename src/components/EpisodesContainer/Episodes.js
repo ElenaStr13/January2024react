@@ -4,28 +4,31 @@ import {useSearchParams} from "react-router-dom";
 import {episodeService} from "../../services";
 import {Episode} from "./Episode";
 import css from "./Episodes.module.css";
-
-
+import {useChapterContext} from "../../hooks";
 
 const Episodes = () => {
     const [episodes,setEpisodes] = useState([]);
     const [query, setQuery] = useSearchParams({page: '1'});
-    //const [prevNext, setPrevNext] = useState({prev: null, next: null})
-    //const {trigger} = useChapterContext();
+    const [prevNext, setPrevNext] = useState({prev: null, next: null})
+    const {trigger} = useChapterContext();
 
     useEffect(() => {
         episodeService.getAll(query.get('page'))
-            .then(({data: {info: {prev, next}, results}}) => setEpisodes({prev, next, results}))
-    }, [query.get('page')]);
+            .then(({data}) => {
+                setEpisodes(data.results)
+                setPrevNext({prev: data.info.prev, next: data.info.next})
+            })
+            //.then(({data: {info: {prev, next}, results}}) => setEpisodes({prev, next, results}))
+    }, [trigger, query.get('page')]);
 
-    const prevHandler = () => {
+    const prev = () => {
         setQuery(prev => {
             prev.set('page', (+prev.get('page') - 1).toString())
             return prev
         })
     }
 
-    const nextHandler = () => {
+    const next = () => {
         setQuery(prev => {
             prev.set('page', (+prev.get('page') + 1).toString())
             return prev
@@ -35,11 +38,12 @@ const Episodes = () => {
     return (
         <div>
             <div className={css.Episodes}>
-                {episodes.results.map(episode => <Episode key={episode.id} episode={episode}/>)}
+                {episodes.map(episode => <Episode key={episode.id} episode={episode}/>)}
             </div>
-
-            <button disabled={!episodes.prev} onClick={prevHandler}>prev</button>
-            <button disabled={!episodes.next} onClick={nextHandler}>next</button>
+            <div className={css.buttons}>
+                <button disabled={!prevNext.prev} onClick={prev}>prev</button>
+                <button disabled={!prevNext.next} onClick={next}>next</button>
+            </div>
         </div>
     );
 };

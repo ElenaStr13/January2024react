@@ -12,6 +12,7 @@ const CharactersPage = () => {
     return (
         <div>
             <button onClick={back}>back</button>
+            <hr/>
             <Characters/>
         </div>
     );
