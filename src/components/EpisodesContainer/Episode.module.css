@@ -1,6 +1,7 @@
 .Episode {
     border: 1px solid;
-    width: calc(20% - 2px);
+    /*width: calc(20% - 2px);*/
+    width:18%;
 }
 
 .Episode:hover {

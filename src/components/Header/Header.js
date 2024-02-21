@@ -6,12 +6,7 @@ const Header = () => {
     const {chapter} = useChapterContext();
     return (
         <div className={css.Header}>
-            {
-                chapter?
-                    <p>{chapter}</p>
-                    :
-                    <p>Rick and Morty</p>
-            }
+            {chapter?<p>{chapter}</p>:<h1>Rick and Morty</h1>}
         </div>
     );
 };

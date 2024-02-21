@@ -7,8 +7,7 @@ const ContextProvider = ({children}) => {
     const changeTrigger = () => {
        setTrigger(prev => !prev)
     }
-    //const [state] = useState({});
-    //{state}
+
 
         return (
         <Context.Provider value={{trigger, changeTrigger, chapter,setChapter}}>

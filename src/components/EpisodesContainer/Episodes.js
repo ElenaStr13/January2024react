@@ -18,7 +18,6 @@ const Episodes = () => {
                 setEpisodes(data.results)
                 setPrevNext({prev: data.info.prev, next: data.info.next})
             })
-            //.then(({data: {info: {prev, next}, results}}) => setEpisodes({prev, next, results}))
     }, [trigger, query.get('page')]);
 
     const prev = () => {

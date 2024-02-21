@@ -1,9 +1,13 @@
 .Episodes{
     display: flex;
     flex-wrap: wrap;
+    gap: 5px;
+    justify-content: center;
 }
 
 .buttons{
     display: flex;
-    justify-content: space-between;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 20px;
 }
