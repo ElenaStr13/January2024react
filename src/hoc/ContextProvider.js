@@ -1,16 +1,12 @@
 import {createContext, useState} from "react";
 
-const Context = createContext(null);
+const Context = createContext(null)
+
 const ContextProvider = ({children}) => {
-    const [trigger, setTrigger] = useState(null);
-    const [chapter, setChapter] = useState()
-    const changeTrigger = () => {
-       setTrigger(prev => !prev)
-    }
+    const state = useState(null);
 
-
-        return (
-        <Context.Provider value={{trigger, changeTrigger, chapter,setChapter}}>
+    return (
+        <Context.Provider value={state}>
             {children}
         </Context.Provider>
     );

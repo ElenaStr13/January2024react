@@ -2,8 +2,7 @@ import {apiService} from "./apiService";
 import {urls} from "../constans";
 
 const episodeService = {
-    getAll: (page = '1') => apiService.get(urls.episode.base, {params: {page}}),
-    getById: (id) => apiService.get(urls.episode.byId(id))
+    getAll: (page ) => apiService.get(urls.episode.base, {params: {page}})
 }
 
 export {

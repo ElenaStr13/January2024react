@@ -4,13 +4,13 @@ import {useSearchParams} from "react-router-dom";
 import {episodeService} from "../../services";
 import {Episode} from "./Episode";
 import css from "./Episodes.module.css";
-import {useChapterContext} from "../../hooks";
+import {usePageQuery} from "../../hooks";
 
 const Episodes = () => {
     const [episodes,setEpisodes] = useState([]);
     const [query, setQuery] = useSearchParams({page: '1'});
     const [prevNext, setPrevNext] = useState({prev: null, next: null})
-    const {trigger} = useChapterContext();
+    const {trigger} = usePageQuery();
 
     useEffect(() => {
         episodeService.getAll(query.get('page'))

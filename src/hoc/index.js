@@ -1,1 +1,2 @@
-export * from './ContextProvider'
+export * from './ContextProvider';
+export * from './useAppContext'

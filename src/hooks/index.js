@@ -1,1 +1,1 @@
-export * from './useChapterContext'
+export * from './usePageQuery'
