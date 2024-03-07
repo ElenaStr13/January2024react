@@ -1,2 +1,2 @@
-export * from './slices/CarsSlice';
+export * from './slices';
 export * from './store';

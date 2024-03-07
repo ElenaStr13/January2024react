@@ -2,9 +2,9 @@ import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 
 import {carService} from "../services/carService";
+import {carsActions} from "../store";
 import {CarForm} from "./CarForm";
 import {Cars} from "./Cars";
-import {carsActions} from "../store";
 
 const CarsContainer = () => {
     const {cars} = useSelector(state => state.cars);

@@ -1,4 +1,4 @@
-import {CarsContainer} from "../components/CarsContainer";
+import {CarsContainer} from "../components";
 
 
 const CarsPage = () => {
