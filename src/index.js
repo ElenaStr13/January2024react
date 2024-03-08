@@ -3,14 +3,16 @@ import {RouterProvider} from "react-router-dom";
 
 import './index.css';
 import {router} from "./router";
-import {ContextProvider} from "./hoc";
+
+import {Provider} from "react-redux";
+import {store} from "./store";
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <ContextProvider>
+    <Provider store={store}>
         <RouterProvider router={router}/>
-    </ContextProvider>
+    </Provider>
 
 );
 

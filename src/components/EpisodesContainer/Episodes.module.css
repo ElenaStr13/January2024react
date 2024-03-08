@@ -11,3 +11,9 @@
     justify-content: space-around;
     padding: 20px;
 }
+.pagination {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    margin: 10px auto;
+}

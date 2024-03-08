@@ -2,26 +2,27 @@ import React, {useEffect, useState} from 'react';
 
 import {characterService} from "../../services";
 import {useNavigate, useParams} from "react-router-dom";
-import {useAppContext} from "../../hoc";
 import {Character} from "./Character";
+import {useDispatch, useSelector} from "react-redux";
+import {charactersActions} from "../../store";
 
 const Characters = () => {
-    const [characters, setCharacters] = useState([])
+    const {characters} = useSelector(state => state.characters)
     const {ids} = useParams();
+    const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [, setName] = useAppContext();
 
     useEffect(() => {
-        characterService.getByIds(ids).then(({data}) => setCharacters(data))
+        dispatch(charactersActions.getAll({ids}))
     }, [ids]);
 
-    const back = () => {
-        navigate(-1)
-        setName(null)
+    const homePage = () => {
+        navigate((`/episodes`))
     }
+
     return (
         <div>
-            <button onClick={back}>back</button>
+            <button onClick={homePage}>Episodes</button>
             {characters.map(character => <Character key={character.id} character={character}/>)}
         </div>
     );
