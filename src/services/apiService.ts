@@ -22,9 +22,10 @@ apiService.interceptors.response.use(
     async (error:AxiosError)=>{
         const originalRequest = error.config; //запит на помилку
         if (error.response.status === 401) {   //якщо помилка 401
+            if (!isRefreshing) {
                 isRefreshing = true
                 try {
-                    await authService.refresh();   // виконується refresh запит
+                    await authService.refresh(); // виконується refresh запит
                     isRefreshing = false;          // закінчується refresh
                     runAfterRefresh();             // виконуються функції, які не встигли виконатися в refresh запиті, так як він виконує тільки одну дію
                     return apiService(originalRequest)  //ще раз робить запит на cars або me
@@ -43,11 +44,11 @@ apiService.interceptors.response.use(
                     resolve(apiService(originalRequest))
                 })
             })
-        }
-        return Promise.reject(error)                               // інша помилка, ніж 401
+    }
+        return Promise.reject(error)  // інша помилка, ніж 401
+
     }
 )
-
 const subscribeToWaitList = (cb: IWaitList): void => {
     waitList.push(cb)                                   //звертається до waitList і додає callback function
 }                                                       // але не запускає ці функції
