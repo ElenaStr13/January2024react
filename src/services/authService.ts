@@ -11,6 +11,17 @@ const authService = {
     register(user:IAuth): IRes<IUser> { //регістрація - input user, out response:IRes<IUser>
         return apiService.post(urls.auth.register, user)
     },
+    async login(user:IAuth): Promise<IUser> {                         //return Promise, because function asynction
+        const {data} = await apiService.post(urls.auth.login, user)   //tokens
+        this.setTokens(data)
+        const {data:me} = await this.me();
+        return me                                                     // return promise -> me<IUser>
+    },
+    async refresh():Promise<void> {       //перезапис токену для refresh оновлення
+        const refreshToken = this.getRefreshToken();  //refresh
+        const {data} = await apiService.post(urls.auth.refresh, {refresh:refreshToken}); //{refresh}
+        this.setTokens(data)
+    },
     me():IRes<IUser>  { // запит на самого себе
         return apiService.get(urls.auth.me)
     },

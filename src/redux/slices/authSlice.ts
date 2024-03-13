@@ -1,47 +1,90 @@
 import {createAsyncThunk, createSlice, isFulfilled, isRejected} from "@reduxjs/toolkit";
 import {AxiosError} from "axios";
-import {IAuth} from "../../interfaces";
+import {IAuth, IUser} from "../../interfaces";
 import {authService} from "../../services";
 
 interface IState {
-    registerError:string
+    registerError: string;
+    loginError: string;
+    currentUser: IUser
 }
 
 const initialState: IState = {
-       registerError:null
-}
+    registerError: null,
+    loginError: null,
+    currentUser: null
+};
 
-const register = createAsyncThunk<void, {user:IAuth}>( //out - void(nobody), input-user
-"authSlice/register",
-    async ({user}, {rejectWithValue})=> {
-    try {
-        await authService.register(user)
-    }catch (e) {
-        const err = e as AxiosError
-        return rejectWithValue(err.response.data)
+const register = createAsyncThunk<void, { user: IAuth }>(
+    'authSlice/register',
+    async ({user}, {rejectWithValue}) => {
+        try {
+            await authService.register(user)
+        } catch (e) {
+            const err = e as AxiosError
+            return rejectWithValue(err.response.data)
+        }
     }
+)
+
+const login = createAsyncThunk<IUser, { user: IAuth }>(  //return IUser, because authService(me<IUser>, input user<IAuth>
+    'authSlice/login',
+    async ({user}, {rejectWithValue}) => {
+        try {
+            return await authService.login(user);
+        } catch (e) {
+            const err = e as AxiosError
+            return rejectWithValue(err.response.data)
+        }
+    }
+)
+const me = createAsyncThunk<IUser, void>(
+    'authSlice/me',
+    async (_, {rejectWithValue}) => {
+        try {
+            const {data} = await authService.me();
+            return data
+        } catch (e) {
+            const err = e as AxiosError
+            return rejectWithValue(err.response.data)
+        }
     }
 )
 const authSlice = createSlice({
     name: 'authSlice',
     initialState,
-    reducers:{},
+    reducers: {},
     extraReducers: builder =>
         builder
-            .addMatcher(isRejected(register), state =>{
+            .addCase(login.fulfilled, (state, action) => {
+                state.currentUser = action.payload             //запис поточного user from state
+            })
+            .addCase(register.rejected, state => {   //on register was reject
                 state.registerError = 'Username already exist'
             })
-            .addMatcher(isFulfilled(register), state => {
-                state.registerError = null
+            .addCase(login.rejected, state => {
+                state.loginError = 'Wrong username or password'
             })
+            .addCase(me.fulfilled, (state, action) => {
+                state.currentUser = action.payload              //зміна currentUser на значення в action
+            })
+            .addMatcher(isFulfilled(register, login), state => {
+                state.registerError = null
+                state.loginError = null
+            })
+
 })
-const {reducer:authReducer, actions} = authSlice;
+
+const {reducer: authReducer, actions} = authSlice;
 
 const authActions = {
     ...actions,
-    register
+    register,
+    login,
+    me
 }
+
 export {
-    authReducer,
-    authActions
-};
+    authActions,
+    authReducer
+}
