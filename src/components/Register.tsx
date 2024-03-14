@@ -1,8 +1,11 @@
 import {SubmitHandler, useForm} from "react-hook-form";
-import {IAuth} from "../interfaces";
-import {authActions} from "../redux";
-import {useAppDispatch, useAppSelector} from "../hooks";
 import {useNavigate} from "react-router-dom";
+import {Button, TextField} from "@mui/material";
+import {authActions} from "../redux";
+
+import {IAuth} from "../interfaces";
+import {useAppDispatch, useAppSelector} from "../hooks";
+
 
 const Register = () => {
     const {register, handleSubmit} = useForm<IAuth>();
@@ -21,10 +24,10 @@ const Register = () => {
     return (
         <div>
             {registerError && <h5>{registerError}</h5>}
-            <form onSubmit={handleSubmit(reg)}>
-                <input type="text" placeholder={'username'} {...register('username')}/>
-                <input type="text" placeholder={'password'} {...register('password')}/>
-                <button>register</button>
+            <form onSubmit={handleSubmit(reg)} style={{margin:'10px 0', display:'flex', alignItems:'center'}}>
+                <TextField label="Username" variant="outlined" {...register('username')}/>
+                <TextField  label="Password" variant="outlined" {...register('password')} />
+                <Button variant={'contained'}>register</Button>
             </form>
         </div>
     );
